@@ -6,10 +6,11 @@ import axios from 'axios';
 */
 axios.get('https://api.github.com/users/brio0')
   .then(res => {
-    console.log(res)
+    console.log(res.data)
+    document.querySelector('.cards').appendChild(getCard(res.data))
   })
-  .catch(error => console.err(error))
-
+  .catch((error) => console.log('error'))
+  .finally(() => { console.log('done!!') })
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -36,6 +37,49 @@ axios.get('https://api.github.com/users/brio0')
 */
 
 const followersArray = [];
+
+function getCard(obj) {
+  const card = document.createELement('div');
+  const img = document.createELement('img');
+  const cardInfo = document.createELement('div');
+  const name = document.createELement('h3');
+  const userName = document.createELement('p');
+  const location = document.createElement('p')
+  const profile = document.createElement('p');
+  const profileLink = document.createELement('a');
+  const followers = document.createElement('p');
+  const follwing = document.createElement('p');
+  const bio = document.createElement('p');
+
+  img.src = obj.avatar.url;
+  img.alt = 'git hub profile picture';
+  name.textContent = obj.name;
+  userName.textContent = obj.login;
+  location.tetContent = obj.location;
+  profile.textContent = 'Profile';
+  profileLink.textContent = 'Link to profile';
+  profileLink.href = obj.html_url;
+  followers.textContent = obj.followers;
+  following.textContent = obj.following;
+  bio.textContent = obj.bio
+
+
+  card.appendChild(img);
+  card.appendChild(cardInfo);
+  cardInfo.appendChild(name);
+  cardInfo.appendChild(userName);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(profile);
+  profile.appendChild(profileLink);
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(follwing);
+  cardInfo.appendChild(bio);
+
+
+  return card;
+
+
+};
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
