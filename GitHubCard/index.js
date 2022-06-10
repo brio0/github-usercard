@@ -4,7 +4,7 @@ import axios from 'axios';
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
-axios.get('https://api.github.com/users')
+axios.get('https://api.github.com/users/brio0')
   .then(res => {
     console.log(res)
   })
